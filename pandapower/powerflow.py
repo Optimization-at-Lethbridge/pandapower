@@ -21,6 +21,9 @@ from pandapower.pypower.pfsoln import pfsoln as pfsoln_pypower
 from pandapower.results import _extract_results, _copy_results_ppci_to_ppc, init_results, \
     verify_results, _ppci_bus_to_ppc, _ppci_other_to_ppc
 
+from pennylane import numpy as np
+from sys import stdout, stderr
+
 try:
     import pandaplan.core.pplog as logging
 except ImportError:
@@ -141,6 +144,10 @@ def _run_pf_algorithm(ppci, options, **kwargs):
     algorithm = options["algorithm"]
     ac = options["ac"]
 
+    is_quantum = options["IS_QUANTUM"]  ## Is classical or quantum approaches to solve linear systems
+    quantum_alg = options["QUANTUM_ALG"] ## Quantum Algorithm; 1 for HHL; 2 for VQLS
+
+
     if ac:
         _, pv, pq = bustypes(ppci["bus"], ppci["gen"])
         # ----- run the powerflow -----
@@ -151,6 +158,14 @@ def _run_pf_algorithm(ppci, options, **kwargs):
         elif algorithm == 'bfsw':  # forward/backward sweep power flow algorithm
             result = _run_bfswpf(ppci, options, **kwargs)[0]
         elif algorithm in ['nr', 'iwamoto_nr']:
+            if is_quantum:
+                stdout.write('Solving systems of linear equations by quantum method\n')
+                if quantum_alg == 1:
+                    stdout.write('Applying HHL quantum algorithm.\n')
+                else:
+                    stdout.write('Applying VQLS hybrid quantum classical algorithm.\n')
+            else:
+                stdout.write('Solving systems of linear equations by classical method\n')
             result = _run_newton_raphson_pf(ppci, options)
         elif algorithm in ['fdbx', 'fdxb', 'gs']:  # algorithms existing within pypower
             result = _runpf_pypower(ppci, options, **kwargs)[0]

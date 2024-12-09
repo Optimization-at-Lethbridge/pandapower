@@ -74,6 +74,8 @@ def pipsopf_solver(om, ppopt, out_opt=None):
 
     ## options
     verbose = ppopt['VERBOSE']
+    is_quantum = ppopt['IS_QUANTUM']
+    quantum_alg= ppopt['QUANTUM_ALG']
     feastol = ppopt['PDIPM_FEASTOL']
     gradtol = ppopt['PDIPM_GRADTOL']
     comptol = ppopt['PDIPM_COMPTOL']
@@ -92,7 +94,9 @@ def pipsopf_solver(om, ppopt, out_opt=None):
              'max_red': max_red,
              'step_control': step_control,
              'cost_mult': 1e-4,
-             'verbose': verbose  }
+             'verbose': verbose,
+             'is_quantum': is_quantum,
+             'quantum_alg': quantum_alg  }
 
     ## unpack data
     ppc = om.get_ppc()

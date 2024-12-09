@@ -49,6 +49,10 @@ from pandapower.pf.create_jacobian_tdpf import calc_g_b, calc_a0_a1_a2_tau, calc
 from pandapower.pf.create_jacobian_facts import create_J_modification_svc, \
     create_J_modification_tcsc, create_J_modification_ssc_vsc, create_J_modification_hvdc
 
+import sys
+from pennylane import numpy as np
+from .HHL_conversion import hhl_helper
+from pypower.vqls_helper import VQLSSolver
 
 def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
     """Solves the power flow using a full Newton's method.
@@ -439,6 +443,35 @@ def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
             J = J + J_m_hvdc
 
         dx = -1 * spsolve(J, F, permc_spec=permc_spec, use_umfpack=use_umfpack)
+        #dx = -1 * spsolve(J, F)
+        if is_quantum:
+            J_dense = J.toarray()
+            cond_number = np.linalg.cond(J_dense, p=2)
+            print(f" Condition number : {cond_number}")
+            if quantum_alg == 1:
+                sys.stdout.write("\nApplying HHL quantum algorithm.\n")
+                hhl = hhl_helper()  ## initialize an instance of hhl_helper
+                q_solution = -1 * hhl.run_HHL(J_dense, F, 1e-8)  ## update with HHL
+            else:
+                sys.stdout.write("\nApplying VQLS hybrid quantum-classical algorithm.\n")
+                # Create an instance of the VQLSSolver class
+                vqls_solver = VQLSSolver(J_dense, F, num_layers=7, max_iterations=500, conv_tol=1e-17, stepsize=0.1)
+                # Solve the system of linear equation using VQLS
+                q_solution = -1 * vqls_solver.vqls_solve()
+            dx = q_solution
+            c_solution = np.linalg.solve(J_dense, F)
+            # Print classical and quantum solutions
+            # print(f"Classical solution: {c_solution}")
+            # print(f"Quantum solution: {q_solution}")
+
+            # Calculate the error between classical and quantum solutions
+            error = np.linalg.norm(c_solution - q_solution)
+            print(f"  Error between classical and quantum solutions: {error}")
+
+
+
+
+
         # update voltage
         if dist_slack:
             slack = slack + dx[j0:j1]

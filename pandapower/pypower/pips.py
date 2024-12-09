@@ -18,9 +18,42 @@ from pandapower.pypower.pipsver import pipsver
 from scipy.sparse import vstack, hstack, eye, csr_matrix as sparse
 from scipy.sparse.linalg import spsolve
 
+import sys
+from pennylane import numpy as np
+from .HHL_conversion import hhl_helper
+from pypower.vqls_helper import VQLSSolver
+
 
 EPS = finfo(float).eps
 
+def solve_with_vqls(vqls_solver, Ab_dense, bb, residual_threshold):
+    while True:
+        c_solution = np.linalg.solve(Ab_dense, bb)
+
+        # Solve the system using VQLSSolver
+        dxdlam = vqls_solver.vqls_solve()
+        q_solution = dxdlam
+        # Print classical and quantum solutions
+        #print(f"Classical solution: {c_solution}")
+        #yprint(f"Quantum solution: {q_solution}")
+
+        # Calculate the error between classical and quantum solutions
+        error = np.linalg.norm(c_solution - q_solution) / np.linalg.norm(c_solution)
+        print(f"Error between classical and quantum solutions: {error}")
+
+
+        # Calculate the residual norm
+        #residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)/np.linalg.norm(bb)
+        residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)
+
+        # Check if the residual norm is within the threshold
+        if residual_norm <= residual_threshold:
+            break
+        else:
+            print(
+                f"Residual norm ({residual_norm}) is greater than the threshold ({residual_threshold}). Recalculating dxdlam...")
+
+    return dxdlam
 
 def pips(f_fcn, x0=None, A=None, l=None, u=None, xmin=None, xmax=None,
          gh_fcn=None, hess_fcn=None, opt=None):
@@ -392,6 +425,37 @@ def pips(f_fcn, x0=None, A=None, l=None, u=None, xmin=None, xmax=None,
         bb = r_[-N, -g]
 
         dxdlam = spsolve(Ab.tocsr(), bb)
+        is_quantum = opt['is_quantum']
+        quantum_alg = opt['quantum_alg']
+        if is_quantum:
+            Ab_dense = Ab.toarray()
+            cond_number = np.linalg.cond(Ab_dense, p=2)
+            ilu = spilu(Ab_dense)
+            preconditioner = LinearOperator(Ab_dense.shape, ilu.solve)
+            preconditioned_Ab = preconditioner @ Ab_dense
+            preconditioned_bb = preconditioner @ bb
+            print(f"\nCondition number : {cond_number}")
+            if quantum_alg == 1:
+                sys.stdout.write("\nApplying HHL quantum algorithm.\n")
+                hhl = hhl_helper()  ## initialize an instance of hhl_helper
+                q_solution = -1 * hhl.run_HHL(preconditioned_Ab, preconditioned_bb, 1e-8)  ## update with HHL
+            else:
+                sys.stdout.write("\nApplying VQLS hybrid quantum-classical algorithm.\n")
+                # Define a threshold for the residual norm
+                residual_threshold = 1e-2
+                # Create an instance of the VQLSSolver class
+                vqls_solver = VQLSSolver(preconditioned_Ab, preconditioned_bb, num_layers=7, max_iterations=500, conv_tol=1e-17, stepsize=0.01)
+                # Solve the system of linear equation using VQLS
+                q_solution = solve_with_vqls(vqls_solver, preconditioned_Ab, preconditioned_bb, residual_threshold)
+            dxdlam = q_solution
+            c_solution = np.linalg.solve(preconditioned_Ab, preconditioned_bb)
+            # Print classical and quantum solutions
+            # print(f"Classical solution: {c_solution}")
+            # print(f"Quantum solution: {q_solution}")
+
+            # Calculate the error between classical and quantum solutions
+            error = np.linalg.norm(c_solution - q_solution)
+            print(f"  Error between classical and quantum solutions: {error}")
 
         if any(isnan(dxdlam)):
             if opt["verbose"]:

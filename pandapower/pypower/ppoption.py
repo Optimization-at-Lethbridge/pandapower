@@ -9,11 +9,21 @@ from numpy import inf
 
 
 PF_OPTIONS = [
+    ('is_quantum', False, '''Option to use classical or quantum approach to solve
+the systems of linear equations; Default is classical,
+False - use Classical formulation & corresponding algorithm opts,
+True  - use Quantum formulation, & corresponding algorithm opts'''),
+
     ('pf_alg', 1, '''power flow algorithm:
 1 - Newton's method,
 2 - Fast-Decoupled (XB version),
 3 - Fast-Decoupled (BX version),
 4 - Gauss Seidel'''),
+
+    ('quantum_alg', 2, '''Quantum or Hybrid Quantum-Classical algorithm to solve
+the systems of linear equations; Default is VQLS, :
+1 - HHL quantum algorithm,
+2 - VQLS hybrid quantum-classical algorithm'''),
 
     ('pf_tol', 1e-8, 'termination tolerance on per unit P & Q mismatch'),
 
@@ -34,6 +44,11 @@ True  - use DC formulation, ignore AC algorithm options''')
 ]
 
 OPF_OPTIONS = [
+    ('is_quantum', False, '''Option to use classical or quantum approach to solve
+the systems of linear equations; Default is classical,
+False - use Classical formulation & corresponding algorithm opts,
+True  - use Quantum formulation, & corresponding algorithm opts'''),
+
     ('opf_alg', 0, '''algorithm to use for OPF:
 0 - choose best default solver available in the
 following order, 500, 540, 520 then 100/200
@@ -45,6 +60,11 @@ as follows, (see the User's Manual for more details)
 primal/dual interior point method,
 545 - generalized formulation (except CCV), SC-MIPS
 step-controlled primal/dual interior point method'''),
+
+    ('quantum_alg', 2, '''Quantum or Hybrid Quantum-Classical algorithm to solve
+the systems of linear equations; Default is VQLS, :
+1 - HHL quantum algorithm,
+2 - VQLS hybrid quantum-classical algorithm'''),
 
 #    ('opf_poly2pwl_pts', 10, 'number of evaluation points to use when '
 #     'converting from polynomial to piece-wise linear costs)'),

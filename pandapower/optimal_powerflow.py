@@ -42,6 +42,18 @@ def _optimal_powerflow(net, verbose, suppress_warnings, **kwargs):
         logger.error("pandapower optimal_powerflow does not support voltage depend loads.")
 
     ppopt = ppoption(VERBOSE=verbose, PF_DC=not ac, INIT=init, **kwargs)
+
+    is_quantum = ppopt["IS_QUANTUM"]  ## Is classical or quantum approaches to solve linear systems
+    quantum_alg = ppopt["QUANTUM_ALG"]  ## Quantum Algorithm; 1 for HHL; 2 for VQLS
+    if is_quantum:
+        stdout.write('Solving systems of linear equations by quantum method\n')
+        if quantum_alg == 1:
+            stdout.write('Applying HHL quantum algorithm.\n')
+        else:
+            stdout.write('Applying VQLS hybrid quantum-classical algorithm.\n')
+    else:
+        stdout.write('Solving systems of linear equations by classical method\n')
+        
     net["OPF_converged"] = False
     net["converged"] = False
     _add_auxiliary_elements(net)
