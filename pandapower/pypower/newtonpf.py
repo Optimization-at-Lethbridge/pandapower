@@ -71,6 +71,8 @@ def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
     """
 
     # options
+    is_quantum  = options['IS_QUANTUM']
+    quantum_alg = options['QUANTUM_ALG']
     tol = options['tolerance_mva']
     max_it = options["max_iteration"]
     numba = options["numba"]
@@ -446,16 +448,14 @@ def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
         #dx = -1 * spsolve(J, F)
         if is_quantum:
             J_dense = J.toarray()
-            cond_number = np.linalg.cond(J_dense, p=2)
-            print(f" Condition number : {cond_number}")
             if quantum_alg == 1:
-                sys.stdout.write("\nApplying HHL quantum algorithm.\n")
+                sys.stdout.write("\nApplying HHL quantum algorithm (NR).\n")
                 hhl = hhl_helper()  ## initialize an instance of hhl_helper
                 q_solution = -1 * hhl.run_HHL(J_dense, F, 1e-8)  ## update with HHL
             else:
-                sys.stdout.write("\nApplying VQLS hybrid quantum-classical algorithm.\n")
+                sys.stdout.write("\nApplying VQLS hybrid quantum-classical algorithm (NR).\n")
                 # Create an instance of the VQLSSolver class
-                vqls_solver = VQLSSolver(J_dense, F, num_layers=7, max_iterations=500, conv_tol=1e-17, stepsize=0.1)
+                vqls_solver = VQLSSolver(J_dense, F, num_layers=7, max_iterations=500, conv_tol=1e-17, stepsize=0.01)
                 # Solve the system of linear equation using VQLS
                 q_solution = -1 * vqls_solver.vqls_solve()
             dx = q_solution

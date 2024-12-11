@@ -413,6 +413,14 @@ def runpp_quantum(net, algorithm='nr', calculate_voltage_angles=True, init="auto
 
     # if dict 'user_pf_options' is present in net, these options overrule the net._options
     # except for parameters that are passed by user
+    # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+    if "PF_ALG" not in kwargs:
+        kwargs["PF_ALG"]=1
+    if "IS_QUANTUM" not in kwargs:
+        kwargs["IS_QUANTUM"]=True
+    if "QUANTUM_ALG" not in kwargs:
+        kwargs["QUANTUM_ALG"]=1
+    verbose = True
     if isinstance(kwargs.get("recycle", None), dict) and _internal_stored(net):
         _recycled_powerflow(net, **kwargs)
         return
@@ -754,6 +762,15 @@ def runopp_quantum(net, verbose=False, calculate_voltage_angles=True, check_conn
             - PDIPM_MAX_IT  (150) maximum number of iterations
             - SCPDIPM_RED_IT(20) maximum number of step size reductions per iteration
     """
+    # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+    if "OPF_ALG" not in kwargs:
+        kwargs["OPF_ALG"]=560
+    if "IS_QUANTUM" not in kwargs:
+        kwargs["IS_QUANTUM"]=True
+    if "QUANTUM_ALG" not in kwargs:
+        kwargs["QUANTUM_ALG"]=1
+    verbose = True
+    
     _check_necessary_opf_parameters(net, logger)
     _init_runopp_options(net, calculate_voltage_angles=calculate_voltage_angles,
                          check_connectivity=check_connectivity,
@@ -856,6 +873,15 @@ def rundcopp_quantum(net, verbose=False, check_connectivity=True, suppress_warni
     if (not net.load.empty) & ("controllable" not in net.load.columns):
         logger.warning('Warning: Please specify load["controllable"]\n')
 
+    # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+    if "OPF_ALG" not in kwargs:
+        kwargs["OPF_ALG"]=560
+    if "IS_QUANTUM" not in kwargs:
+        kwargs["IS_QUANTUM"]=True
+    if "QUANTUM_ALG" not in kwargs:
+        kwargs["QUANTUM_ALG"]=1
+    verbose = True
+
     _init_rundcopp_options(net, check_connectivity=check_connectivity,
                            switch_rx_ratio=switch_rx_ratio, delta=delta,
                            trafo3w_losses=trafo3w_losses, **kwargs)
@@ -890,3 +916,20 @@ def _passed_runpp_parameters(local_parameters):
     passed_parameters.update(kwargs_parameters)
 
     return passed_parameters
+
+
+if __name__ == '__main__':
+    #ppopt = ppoption(PF_ALG=1, PF_DC=False, VERBOSE=2, IS_QUANTUM=False)
+
+    # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+    #ppopt = ppoption(PF_ALG=1, PF_DC=False, VERBOSE=2, IS_QUANTUM=True, QUANTUM_ALG=2)
+
+    #ppc = case3()
+    #run_quantum_opf(ppc, ppopt)
+
+    #ppc = case5()
+    #run_quantum_opf(ppc, ppopt)
+
+    net = pn.case9()
+    pp.runopp_quantum(net)
+    print(net.res_bus)

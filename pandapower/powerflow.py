@@ -144,10 +144,6 @@ def _run_pf_algorithm(ppci, options, **kwargs):
     algorithm = options["algorithm"]
     ac = options["ac"]
 
-    is_quantum = options["IS_QUANTUM"]  ## Is classical or quantum approaches to solve linear systems
-    quantum_alg = options["QUANTUM_ALG"] ## Quantum Algorithm; 1 for HHL; 2 for VQLS
-
-
     if ac:
         _, pv, pq = bustypes(ppci["bus"], ppci["gen"])
         # ----- run the powerflow -----
@@ -158,14 +154,8 @@ def _run_pf_algorithm(ppci, options, **kwargs):
         elif algorithm == 'bfsw':  # forward/backward sweep power flow algorithm
             result = _run_bfswpf(ppci, options, **kwargs)[0]
         elif algorithm in ['nr', 'iwamoto_nr']:
-            if is_quantum:
-                stdout.write('Solving systems of linear equations by quantum method\n')
-                if quantum_alg == 1:
-                    stdout.write('Applying HHL quantum algorithm.\n')
-                else:
-                    stdout.write('Applying VQLS hybrid quantum classical algorithm.\n')
-            else:
-                stdout.write('Solving systems of linear equations by classical method\n')
+            options["IS_QUANTUM"] = kwargs["IS_QUANTUM"]
+            options["QUANTUM_ALG"] = kwargs["QUANTUM_ALG"]
             result = _run_newton_raphson_pf(ppci, options)
         elif algorithm in ['fdbx', 'fdxb', 'gs']:  # algorithms existing within pypower
             result = _runpf_pypower(ppci, options, **kwargs)[0]

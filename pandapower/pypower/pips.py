@@ -22,7 +22,8 @@ import sys
 from pennylane import numpy as np
 from .HHL_conversion import hhl_helper
 from pypower.vqls_helper import VQLSSolver
-
+from scipy.sparse.linalg import spilu, LinearOperator
+from pennylane import numpy as np
 
 EPS = finfo(float).eps
 
