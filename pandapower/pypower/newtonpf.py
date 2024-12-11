@@ -51,8 +51,8 @@ from pandapower.pf.create_jacobian_facts import create_J_modification_svc, \
 
 import sys
 from pennylane import numpy as np
-from .HHL_conversion import hhl_helper
-from pypower.vqls_helper import VQLSSolver
+from pandapower.pypower.HHL_conversion import hhl_helper
+from pandapower.pypower.vqls_helper import VQLSSolver
 
 def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
     """Solves the power flow using a full Newton's method.
@@ -466,7 +466,7 @@ def newtonpf(Ybus, Sbus, V0, ref, pv, pq, ppci, options, makeYbus=None):
 
             # Calculate the error between classical and quantum solutions
             error = np.linalg.norm(c_solution - q_solution)
-            print(f"  Error between classical and quantum solutions: {error}")
+            print(f"Error between classical and quantum solutions: {error}")
 
 
 
