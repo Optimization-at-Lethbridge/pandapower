@@ -48,8 +48,8 @@ else:
     print("Power Flow did not converge. Check your input data or constraints.")
 ```
 
-.. raw:: html
-
+``
+    <html>
     <a href="https://www.pandapower.org">
        <picture>
          <source media="(prefers-color-scheme: dark)" srcset="https://www.pandapower.org/images/pp_light.svg">
@@ -57,18 +57,19 @@ else:
          <img alt="logo" src="//www.pandapower.org/images/pp.svg">
        </picture>
     </a>
-
+    </html>
+``
 |
 
-.. image:: https://badge.fury.io/py/pandapower.svg
+   image:: https://badge.fury.io/py/pandapower.svg
    :target: https://pypi.python.org/pypi/pandapower
    :alt: PyPI
 
-.. image:: https://img.shields.io/pypi/pyversions/pandapower.svg
+   image:: https://img.shields.io/pypi/pyversions/pandapower.svg
    :target: https://pypi.python.org/pypi/pandapower
    :alt: versions
 
-.. image:: https://readthedocs.org/projects/pandapower/badge/
+   image:: https://readthedocs.org/projects/pandapower/badge/
    :target: http://pandapower.readthedocs.io/
    :alt: docs
 
@@ -93,7 +94,7 @@ else:
    :alt: binder
 
 
-
+### pandapower
 
 
 pandapower is an easy to use network calculation program aimed to automate the analysis and optimization of power
@@ -104,13 +105,13 @@ power flow implementation, all `PYPOWER <https://pypi.python.org/pypi/PYPOWER>`_
 
 More information about pandapower can be found on `www.pandapower.org <https://www.pandapower.org/>`_:
 
-About pandapower:
+### About pandapower:
 
 - `Power System Modeling <https://www.pandapower.org/about/#modeling>`_
 - `Power System Analysis <https://www.pandapower.org/about/#analysis>`_
 - `Citing pandapower <https://www.pandapower.org/references/>`_
 
-Getting Started:
+### Getting Started:
 
 - `Installation Notes <https://www.pandapower.org/start/>`_
 - `Minimal Example <https://www.pandapower.org/start/#intro>`_
@@ -146,8 +147,9 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
 
 |
 
-.. raw:: html
 
+
+   <html>
     <a href="https://www.iee.fraunhofer.de/en.html">
        <picture>
          <source media="(prefers-color-scheme: dark)" srcset="https://www.pandapower.org/images/contact/Logo_Fraunhofer_IEE_negativ.png">
@@ -155,6 +157,7 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
          <img alt="logo" src="https://www.pandapower.org/images/contact/Logo_Fraunhofer_IEE.png" width=500 >
        </picture>
     </a>
+    </html>
 
 |
 
