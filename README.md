@@ -59,7 +59,7 @@ else:
    </a>
    </html>
 
-|
+
    <html>
    <img alt="PyPI" src="https://badge.fury.io/py/pandapower.svg">
    <a href="https://pypi.python.org/pypi/pandapower" target="_blank">
@@ -87,48 +87,73 @@ else:
 
    </html>
 
-### pandapower
+### About pandapower
 
-pandapower is an easy to use network calculation program aimed to automate the analysis and optimization of power
-systems. It uses the data analysis library `pandas <http://pandas.pydata.org>`_ and is compatible with the commonly
-used MATPOWER / PYPOWER case format. pandapower allows using different solvers including an improved Newton-Raphson
-power flow implementation, all `PYPOWER <https://pypi.python.org/pypi/PYPOWER>`_ solvers, the C++ library solvers for fast steady-state distribution power system analysis of `PowerGridModel <https://github.com/PowerGridModel/power-grid-model>`_, the Newton-Raphson power flow solvers in the C++ library `lightsim2grid <https://github.com/BDonnot/lightsim2grid/>`_, and the
-`PowerModels.jl <https://github.com/lanl-ansi/PowerModels.jl/>`_ library.
+<html>
+<p>pandapower is an easy to use network calculation program aimed to automate the analysis and optimization of power
+systems. It uses the data analysis library <a href="http://pandas.pydata.org">pandas</a> and is compatible with the commonly used MATPOWER / PYPOWER case format. pandapower allows using different solvers including an improved Newton-Raphson power flow implementation, all <a href="https://pypi.python.org/pypi/PYPOWER">PYPOWER</a> solvers, the C++ library solvers for fast steady-state distribution power system analysis of <a href="https://github.com/PowerGridModel/power-grid-model">PowerGridModel</a>, the Newton-Raphson power flow solvers in the C++ library <a href="https://github.com/BDonnot/lightsim2grid/">lightsim2grid</a>, and the <a href="https://github.com/lanl-ansi/PowerModels.jl/">PowerModels.jl</a> library.</p>
 
-More information about pandapower can be found on `www.pandapower.org <https://www.pandapower.org/>`_:
+<p>
+More information about pandapower can be found on <a href="https://www.pandapower.org/">www.pandapower.org</a>:
+</p>
+</html>
 
-### About pandapower:
+### Citing pandapower:
 
-- `Power System Modeling <https://www.pandapower.org/about/#modeling>`_
-- `Power System Analysis <https://www.pandapower.org/about/#analysis>`_
-- `Citing pandapower <https://www.pandapower.org/references/>`_
+<html>
+-<a href="https://www.pandapower.org/about/#modeling">Power System Modeling</a>
+-<a href="https://www.pandapower.org/about/#analysis">Power System Analysis</a>
+-<a href="https://www.pandapower.org/references/">Citing pandapower</a>
+</html>
 
 ### Getting Started:
 
-- `Installation Notes <https://www.pandapower.org/start/>`_
-- `Minimal Example <https://www.pandapower.org/start/#intro>`_
-- `Interactive Tutorials <https://www.pandapower.org/start/#tutorials>`_
-- `Documentation <https://pandapower.readthedocs.io/>`_
+<html>
+-<a href="https://www.pandapower.org/start/">Installation Notes</a>
+-<a href="<https://www.pandapower.org/start/#intro">Minimal Example</a>
+-<a href="https://www.pandapower.org/start/#tutorials">Interactive Tutorialsg</a>
+-<a href="https://pandapower.readthedocs.io/">Documentation</a>
+</html>
 
-If you are interested in the latest pandapower developments, subscribe to our `mailing list <https://www.pandapower.org/contact/#list>`_!
 
-.. image:: https://simbench.de/wp-content/uploads/2019/01/logo.png
-   :target: https://www.simbench.net
-   :alt: SimBench_logo
+<html>
+If you are interested in the latest pandapower developments, subscribe to our <a href="https://www.pandapower.org/contact/#list">mailing list</a>!
+</html>
 
+
+ <html>
+   <a href="https://www.simbench.net">
+      <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://simbench.de/wp-content/uploads/2019/01/logo.png">
+      <source media="(prefers-color-scheme: light)" srcset="https://simbench.de/wp-content/uploads/2019/01/logo.png">
+      <img alt="SimBench_logo" src="https://simbench.de/wp-content/uploads/2019/01/logo.png">
+      </picture>
+   </a>
+ </html>
+
+
+<html>
 To get realistic load profile data and grid models across all voltage levels that are ready to
 be used in pandapower, have a look at the *SimBench* `project website <https://www.simbench.net>`_ or
 `on GitHub <https://github.com/e2nIEE/simbench>`_.
+</html>
 
-.. image:: https://www.pandapipes.org/images/pp.svg
-   :target: https://www.pandapipes.org
-   :width: 270pt
-   :alt: pandapipes_logo
+ <html>
+   <a href="https://www.pandapipes.org">
+      <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://www.pandapipes.org/images/pp.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://www.pandapipes.org/images/pp.svg">
+      <img alt="pandapipes_logo" src="https://www.pandapipes.org/images/pp.svg">
+      </picture>
+   </a>
+ </html>
 
+
+<html>
 If you want to model pipe networks (heat, gas or water) as well, we recommend
-pandapower's sibling project *pandapipes* (`website <https://www.pandapipes.org>`_, `GitHub repository <https://github.com/e2nIEE/pandapipes>`_).
+pandapower's sibling project *pandapipes* (<a href="https://www.pandapipes.org">website</a>, <a href="https://github.com/e2nIEE/pandapipes">GitHub repository</a>).
+</html>
 
-|
 
 pandapower is a joint development of the research group Energy Management and Power System Operation, University of Kassel and the Department for Distribution System
 Operation at the Fraunhofer Institute for Energy Economics and Energy System Technology (IEE), Kassel.
@@ -138,7 +163,6 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
    <a href="https://www.uni-kassel.de/eecs/en/sections/energiemanagement-und-betrieb-elektrischer-netze/home" target="_blank">
 
    </html>
-
 
 
 
@@ -154,4 +178,8 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
 
 
 
-We welcome contributions to pandapower of any kind - if you want to contribute, please check out the `pandapower contribution guidelines <https://github.com/e2nIEE/pandapower/blob/develop/CONTRIBUTING.rst>`_.
+<html>
+
+We welcome contributions to pandapower of any kind - if you want to contribute, please check out the <a href="https://github.com/e2nIEE/pandapower/blob/develop/CONTRIBUTING.rst">pandapower contribution guidelines</a>.
+
+</html>
