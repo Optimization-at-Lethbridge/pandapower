@@ -101,18 +101,32 @@ More information about pandapower can be found on <a href="https://www.pandapowe
 ### Citing pandapower:
 
 <html>
+<p>
 -<a href="https://www.pandapower.org/about/#modeling">Power System Modeling</a>
+</p>
+<p>
 -<a href="https://www.pandapower.org/about/#analysis">Power System Analysis</a>
+</p>
+<p>
 -<a href="https://www.pandapower.org/references/">Citing pandapower</a>
+</p>
 </html>
 
 ### Getting Started:
 
 <html>
+<p>
 -<a href="https://www.pandapower.org/start/">Installation Notes</a>
+</p>
+<p>
 -<a href="<https://www.pandapower.org/start/#intro">Minimal Example</a>
+</p>
+<p>
 -<a href="https://www.pandapower.org/start/#tutorials">Interactive Tutorialsg</a>
+</p>
+<p>
 -<a href="https://pandapower.readthedocs.io/">Documentation</a>
+</p>
 </html>
 
 
@@ -134,8 +148,7 @@ If you are interested in the latest pandapower developments, subscribe to our <a
 
 <html>
 To get realistic load profile data and grid models across all voltage levels that are ready to
-be used in pandapower, have a look at the *SimBench* `project website <https://www.simbench.net>`_ or
-`on GitHub <https://github.com/e2nIEE/simbench>`_.
+be used in pandapower, have a look at the *SimBench* <a href="https://www.simbench.net">project website</a> or <a href="https://github.com/e2nIEE/simbench">on GitHub</a>.
 </html>
 
  <html>
@@ -180,6 +193,6 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
 
 <html>
 
-We welcome contributions to pandapower of any kind - if you want to contribute, please check out the <a href="https://github.com/e2nIEE/pandapower/blob/develop/CONTRIBUTING.rst">pandapower contribution guidelines</a>.
+We welcome contributions to pandapower of any kind. If you want to contribute, please check out the <a href="https://github.com/e2nIEE/pandapower/blob/develop/CONTRIBUTING.rst">pandapower contribution guidelines</a>.
 
 </html>
