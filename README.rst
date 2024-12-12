@@ -1,3 +1,53 @@
+## Pandapower-Quantum
+
+**A Quantum-Enhanced Power System Analysis Toolbox**
+
+This repository extends the capabilities of the original Pandapower toolbox by integrating quantum computing algorithms to address complex power system problems.
+
+### Key Features
+
+* **Quantum-Accelerated Linear Equation Solvers (HHL):**
+
+> Leverages the power of quantum computation to efficiently solve large-scale linear systems of equations, a crucial step in power flow and optimal power flow calculations. HHL utilizes quantum superposition and interference to achieve potential exponential speedups compared to classical methods.
+
+* **Variational Quantum Linear Solver (VQLS):**
+
+> This hybrid quantum-classical algorithm combines the strengths of both worlds. VQLS tackles problems that are challenging to express using traditional quantum algorithms by working in conjunction with classical optimization techniques. The systems of linears equations can be effectively solved by VQLS. It would help to find the search direction in the convergence for both power flow (PF) and optimal power flow (OPF). The PF used Newton-Raphson (NR) method and OPF uses Primal Dual Interior Point Method (PDIPM).
+
+
+
+### Usage
+
+**HHL and VQLS**
+
+```python
+import pandapower.networks as pn
+import pandapower.run as pp
+
+net = pn.case5()
+kwargs = {}
+kwargs["QUANTUM_ALG"]=2  # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+pp.runpp_quantum(net, **kwargs)
+# Check if the power flow converged
+if net.converged:
+    print("Power Flow Converged!")
+
+    # Print Results
+    print("\n=== Bus Results ===")
+    print(net.res_bus)  # Voltage magnitudes and angles at buses
+
+    print("\n=== Line Results ===")
+    print(net.res_line)  # Line loading, losses, and power flow
+
+    print("\n=== Load Results ===")
+    print(net.res_load)  # Load power consumption
+
+    print("\n=== External Grid Results ===")
+    print(net.res_ext_grid)  # Power injected by the external grid
+else:
+    print("Power Flow did not converge. Check your input data or constraints.")
+```
+
 .. raw:: html
 
     <a href="https://www.pandapower.org">

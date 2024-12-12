@@ -1,9 +1,15 @@
 import pandapower.networks as pn
 import pandapower.run as pp
+from enum import Enum
+
+class quantum_algorithm(Enum):
+    HHL = 1
+    VQLS = 2
+
 
 net = pn.case5()
 kwargs = {}
-kwargs["QUANTUM_ALG"]=2  # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
+kwargs["QUANTUM_ALG"]=quantum_algorithm.VQLS.value  # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
 pp.runpp_quantum(net, **kwargs)
 # Check if the power flow converged
 if net.converged:
