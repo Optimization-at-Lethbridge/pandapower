@@ -48,54 +48,46 @@ else:
     print("Power Flow did not converge. Check your input data or constraints.")
 ```
 
-``
-    <html>
-    <a href="https://www.pandapower.org">
-       <picture>
-         <source media="(prefers-color-scheme: dark)" srcset="https://www.pandapower.org/images/pp_light.svg">
-         <source media="(prefers-color-scheme: light)" srcset="https://www.pandapower.org/images/pp.svg">
-         <img alt="logo" src="//www.pandapower.org/images/pp.svg">
-       </picture>
-    </a>
-    </html>
-``
+
+   <html>
+   <a href="https://www.pandapower.org">
+      <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://www.pandapower.org/images/pp_light.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://www.pandapower.org/images/pp.svg">
+      <img alt="logo" src="//www.pandapower.org/images/pp.svg">
+      </picture>
+   </a>
+   </html>
+
 |
+   <html>
+   <img alt="PyPI" src="https://badge.fury.io/py/pandapower.svg">
+   <a href="https://pypi.python.org/pypi/pandapower" target="_blank">
 
-   image:: https://badge.fury.io/py/pandapower.svg
-   :target: https://pypi.python.org/pypi/pandapower
-   :alt: PyPI
+   <img alt="versions" src="https://img.shields.io/pypi/pyversions/pandapower.svg">
+   <a href="https://pypi.python.org/pypi/pandapower" target="_blank">
 
-   image:: https://img.shields.io/pypi/pyversions/pandapower.svg
-   :target: https://pypi.python.org/pypi/pandapower
-   :alt: versions
+   <img alt="docs" src="https://readthedocs.org/projects/pandapower/badge/">
+   <a href="http://pandapower.readthedocs.io/" target="_blank">
 
-   image:: https://readthedocs.org/projects/pandapower/badge/
-   :target: http://pandapower.readthedocs.io/
-   :alt: docs
+   <img alt="codecov" src="https://codecov.io/github/e2nIEE/pandapower/coverage.svg?branch=master">
+   <a href="https://app.codecov.io/github/e2nIEE/pandapower?branch=master" target="_blank">
 
-.. image:: https://codecov.io/github/e2nIEE/pandapower/coverage.svg?branch=master
-   :target: https://app.codecov.io/github/e2nIEE/pandapower?branch=master
-   :alt: codecov
+   <img alt="codacy" src="https://api.codacy.com/project/badge/Grade/e2ce960935fd4f96b4be4dff9a0c76e3">
+   <a href="https://app.codacy.com/gh/e2nIEE/pandapower?branch=master" target="_blank">
 
-.. image:: https://api.codacy.com/project/badge/Grade/e2ce960935fd4f96b4be4dff9a0c76e3
-   :target: https://app.codacy.com/gh/e2nIEE/pandapower?branch=master
-   :alt: codacy
+   <img alt="BSD" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg">
+   <a href="https://github.com/e2nIEE/pandapower/blob/master/LICENSE" target="_blank">
 
-.. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
-   :target: https://github.com/e2nIEE/pandapower/blob/master/LICENSE
-   :alt: BSD
+   <img alt="pepy" src="https://pepy.tech/badge/pandapower">
+   <a href="https://pepy.tech/project/pandapower" target="_blank">
 
-.. image:: https://pepy.tech/badge/pandapower
-   :target: https://pepy.tech/project/pandapower
-   :alt: pepy
+   <img alt="PyPI" src="https://mybinder.org/badge_logo.svg">
+   <a href="https://mybinder.org/v2/gh/e2nIEE/pandapower/master?filepath=tutorials" target="_blank">
 
-.. image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/e2nIEE/pandapower/master?filepath=tutorials
-   :alt: binder
-
+   </html>
 
 ### pandapower
-
 
 pandapower is an easy to use network calculation program aimed to automate the analysis and optimization of power
 systems. It uses the data analysis library `pandas <http://pandas.pydata.org>`_ and is compatible with the commonly
@@ -141,11 +133,12 @@ pandapower's sibling project *pandapipes* (`website <https://www.pandapipes.org>
 pandapower is a joint development of the research group Energy Management and Power System Operation, University of Kassel and the Department for Distribution System
 Operation at the Fraunhofer Institute for Energy Economics and Energy System Technology (IEE), Kassel.
 
-.. image:: http://www.pandapower.org/images/contact/Logo_e2n.png
-    :target: https://www.uni-kassel.de/eecs/en/sections/energiemanagement-und-betrieb-elektrischer-netze/home
-    :width: 500
+   <html>
+   <img alt="PyPI" src="http://www.pandapower.org/images/contact/Logo_e2n.png">
+   <a href="https://www.uni-kassel.de/eecs/en/sections/energiemanagement-und-betrieb-elektrischer-netze/home" target="_blank">
 
-|
+   </html>
+
 
 
 
@@ -159,6 +152,6 @@ Operation at the Fraunhofer Institute for Energy Economics and Energy System Tec
     </a>
     </html>
 
-|
+
 
 We welcome contributions to pandapower of any kind - if you want to contribute, please check out the `pandapower contribution guidelines <https://github.com/e2nIEE/pandapower/blob/develop/CONTRIBUTING.rst>`_.
