@@ -122,7 +122,7 @@ More information about pandapower can be found on <a href="https://www.pandapowe
 -<a href="<https://www.pandapower.org/start/#intro">Minimal Example</a>
 </p>
 <p>
--<a href="https://www.pandapower.org/start/#tutorials">Interactive Tutorialsg</a>
+-<a href="https://www.pandapower.org/start/#tutorials">Interactive Tutorials</a>
 </p>
 <p>
 -<a href="https://pandapower.readthedocs.io/">Documentation</a>

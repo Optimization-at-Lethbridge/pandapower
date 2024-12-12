@@ -40,13 +40,11 @@ def solve_with_vqls(vqls_solver, Ab_dense, bb, residual_threshold):
 
         # Calculate the error between classical and quantum solutions
         error = np.linalg.norm(c_solution - q_solution) / np.linalg.norm(c_solution)
-        print(f"Error between classical and quantum solutions: {error}")
-
+        #print(f"Error between classical and quantum solutions: {error}")
 
         # Calculate the residual norm
-        #residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)/np.linalg.norm(bb)
-        residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)
-
+        #residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)
+        residual_norm = np.linalg.norm(np.dot(Ab_dense, dxdlam) - bb)/(1+np.linalg.norm(bb))
         # Check if the residual norm is within the threshold
         if residual_norm <= residual_threshold:
             break
@@ -426,16 +424,18 @@ def pips(f_fcn, x0=None, A=None, l=None, u=None, xmin=None, xmax=None,
         bb = r_[-N, -g]
 
         dxdlam = spsolve(Ab.tocsr(), bb)
-        is_quantum = opt['is_quantum']
-        quantum_alg = opt['quantum_alg']
+        is_quantum = False
+        if "is_quantum" in opt:
+            is_quantum = opt['is_quantum']
+            quantum_alg = opt['quantum_alg']
         if is_quantum:
             Ab_dense = Ab.toarray()
-            cond_number = np.linalg.cond(Ab_dense, p=2)
+            #cond_number = np.linalg.cond(Ab_dense, p=2)
             ilu = spilu(Ab_dense)
             preconditioner = LinearOperator(Ab_dense.shape, ilu.solve)
             preconditioned_Ab = preconditioner @ Ab_dense
             preconditioned_bb = preconditioner @ bb
-            print(f"\nCondition number : {cond_number}")
+            #print(f"\nCondition number : {cond_number}")
             if quantum_alg == 1:
                 sys.stdout.write("\nApplying HHL quantum algorithm.\n")
                 hhl = hhl_helper()  ## initialize an instance of hhl_helper
@@ -539,8 +539,8 @@ def pips(f_fcn, x0=None, A=None, l=None, u=None, xmin=None, xmax=None,
             'stepsize': norm(dx), 'obj': f / opt["cost_mult"],
             'alphap': alphap, 'alphad': alphad})
 
-        if opt["verbose"] > 1:
-            print("%3d  %12.8g %10.5g %12g %12g %12g %12g" %
+        #if opt["verbose"] > 1:
+        print("%3d  %12.8g %10.5g %12g %12g %12g %12g" %
                 (i, (f / opt["cost_mult"]), norm(dx), feascond, gradcond,
                  compcond, costcond))
 

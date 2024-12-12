@@ -1,16 +1,25 @@
 import pandapower.networks as pn
-import pandapower.run as pp
+import pandapower as pp
+import pandapower.run as ppr
 from enum import Enum
+import pandapower.converter as pc
+import os
 
 class quantum_algorithm(Enum):
     HHL = 1
     VQLS = 2
 
+        
 
-net = pn.case5()
+#pp_net1 = cv.from_mpc('case9.mat', f_hz=60)
+matpower_testcase_dir = os.path.join(pp.pp_dir, "matpowertestcases")
+case3 = os.path.join(matpower_testcase_dir, 'case3.m')
+net = pc.from_mpc(case3)
+
+#net = pn.case5()
 kwargs = {}
 kwargs["QUANTUM_ALG"]=quantum_algorithm.VQLS.value  # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
-pp.runpp_quantum(net, **kwargs)
+ppr.runpp_quantum(net, **kwargs)
 # Check if the power flow converged
 if net.converged:
     print("Power Flow Converged!")
