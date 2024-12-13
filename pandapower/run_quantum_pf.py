@@ -10,9 +10,9 @@ class quantum_algorithm(Enum):
     VQLS = 2
 
         
-
-#pp_net1 = cv.from_mpc('case9.mat', f_hz=60)
+#pp_net = cv.from_mpc('case9.mat', f_hz=60)
 matpower_testcase_dir = os.path.join(pp.pp_dir, "matpowertestcases")
+#matpower_testcase_dir = os.path.join(os.getcwd(), "matpowertestcases")
 case3 = os.path.join(matpower_testcase_dir, 'case3.m')
 net = pc.from_mpc(case3)
 
@@ -20,6 +20,7 @@ net = pc.from_mpc(case3)
 kwargs = {}
 kwargs["QUANTUM_ALG"]=quantum_algorithm.VQLS.value  # QUANTUM_ALG = 1 for HHL and QUANTUM_ALG = 2 for VQLS
 ppr.runpp_quantum(net, **kwargs)
+#ppr.runpp(net)
 # Check if the power flow converged
 if net.converged:
     print("Power Flow Converged!")

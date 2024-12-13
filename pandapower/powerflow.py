@@ -154,8 +154,11 @@ def _run_pf_algorithm(ppci, options, **kwargs):
         elif algorithm == 'bfsw':  # forward/backward sweep power flow algorithm
             result = _run_bfswpf(ppci, options, **kwargs)[0]
         elif algorithm in ['nr', 'iwamoto_nr']:
-            options["IS_QUANTUM"] = kwargs["IS_QUANTUM"]
-            options["QUANTUM_ALG"] = kwargs["QUANTUM_ALG"]
+            options["IS_QUANTUM"] = False
+            options["QUANTUM_ALG"] = 0
+            if "IS_QUANTUM" in kwargs:
+                options["IS_QUANTUM"] = kwargs["IS_QUANTUM"]
+                options["QUANTUM_ALG"] = kwargs["QUANTUM_ALG"]
             result = _run_newton_raphson_pf(ppci, options)
         elif algorithm in ['fdbx', 'fdxb', 'gs']:  # algorithms existing within pypower
             result = _runpf_pypower(ppci, options, **kwargs)[0]
